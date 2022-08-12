@@ -24,9 +24,8 @@ const Container = styled.section`
 
 const Wrapper = styled.div`
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: start;
-    padding: 274px 0 0;
     width: 100%;
     max-width: 1280px;
     height: 100%;
@@ -56,7 +55,6 @@ const Title = styled.h1`
     font-size: 28px;
     color: var(--white);
     padding-left: 120px;
-    align-self: start;
     position: relative;
     margin-bottom: 50px;
 
