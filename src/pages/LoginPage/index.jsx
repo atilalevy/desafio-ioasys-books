@@ -43,6 +43,7 @@ const Content = styled.div`
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    width: 100%;
     max-width: 368px;
 
     @media(max-width: 680px) {
