@@ -56,11 +56,11 @@ const Button = styled.button`
 `
 
 export default function CustomInput (props) {
-    const { type, label, placeholder, btnLabel, onClick } = props
+    const { type, label, placeholder, btnLabel, onClick, onChange } = props
     return (
         <InputContainer>
             <Label>{label}</Label>
-            <Input type={type} placeholder={placeholder}/>
+            <Input type={type} placeholder={placeholder} onChange={onChange}/>
             {btnLabel && onClick && <Button onClick={onClick}>{btnLabel}</Button>}
         </InputContainer>
     )

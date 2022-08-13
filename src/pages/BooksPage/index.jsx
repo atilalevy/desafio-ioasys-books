@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
-import CustomInput from '../../components/CustomInput'
 import { AuthContext } from '../../Context/AuthContext'
 
 import bgAsset from '../../assets/bg-image-home.webp'
@@ -58,49 +57,17 @@ const Title = styled.h1`
     padding-left: 120px;
     position: relative;
     margin-bottom: 50px;
-
-    &:before {
-        content: '';
-        position: absolute;
-        background-image: url(${ioasysLogo});
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 104px;
-        height: 36px;
-        top: 2px;
-        left: 0;
-    }
 `
 
-const ButtonOut = styled.button`
-    
-`
-
-export default function LoginPage () {
-    const [userEmail, setUserEmail] = useState('')
-    const [userPassword, setUserPassword] = useState('')
-    const { handleLogin, handleLogout, authError, authenticated } = useContext(AuthContext)
+export default function BooksPage () {
+    const { authenticated } = useContext(AuthContext)
+    console.log('BooksPage: ' + authenticated)
 
     return(
         <Container>
             <Wrapper>
                 <Content>
-                    <Title>Books</Title>
-                    <CustomInput 
-                        label={'Email'} 
-                         type={'text'} 
-                         placeholder={'Informe seu email'}
-                         onChange={e => setUserEmail(e.target.value)}
-                    />
-                    <CustomInput 
-                        label={'Senha'} 
-                        type={'password'} 
-                        placeholder={'Informe sua senha'}
-                        btnLabel={'Entrar'}
-                        onChange={e => setUserPassword(e.target.value)}
-                        onClick={() => handleLogin(userEmail, userPassword)} 
-                    />
-                    { authenticated && <ButtonOut onClick={() => handleLogout()}>Sair</ButtonOut> }
+                    <Title>BooksPage</Title>
                 </Content>
             </Wrapper>
         </Container>
