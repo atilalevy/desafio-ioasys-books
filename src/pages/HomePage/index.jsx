@@ -22,7 +22,7 @@ export default function HomePage () {
         setModalOpen(true)
     }
 
-    const userName = localStorage.getItem('username')
+    const userInfo = JSON.parse(localStorage.getItem('userinfo'))
 
     async function getBooks (page) {
         await api.get('/books', { params: { page: page || 1, amount: 12 } })
@@ -38,7 +38,6 @@ export default function HomePage () {
 
     useEffect(() => {
         getBooks()
-        console.log(loading)
     }, [])
 
     return(
@@ -47,7 +46,7 @@ export default function HomePage () {
                 <Header>
                     <Logo>Books</Logo>
                     <UserWelcome>
-                        <p>Bem vindo, <strong>{userName}!</strong> </p>
+                        <p>Bem vind{userInfo.gender === 'M' ? 'o' : 'a'}, <strong>{userInfo.name}!</strong> </p>
                         <button onClick={() => handleLogout()}/>
                     </UserWelcome>
                 </Header>

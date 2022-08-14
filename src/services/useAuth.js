@@ -30,9 +30,14 @@ export default function useAuth() {
         const getToken = res.headers['authorization']
         const getRefreshToken = res.headers['refresh-token']
         const username = res.data.name
+        const usergender = res.data.gender
+        const userInfo = {
+          name: username,
+          gender: usergender
+        }
         localStorage.setItem('token', JSON.stringify(getToken))
         localStorage.setItem('refresh-token', JSON.stringify(getRefreshToken))
-        localStorage.setItem('username', username)
+        localStorage.setItem('userinfo', JSON.stringify(userInfo))
         api.defaults.headers.common['Authorization'] = `Bearer ${getToken}`
         api.defaults.headers.common['refresh-token'] = `${getRefreshToken}`
         setAuthError(false)
@@ -48,7 +53,7 @@ export default function useAuth() {
     setAuthenticated(false)
     localStorage.removeItem('token')
     localStorage.removeItem('refresh-token')
-    localStorage.removeItem('username')
+    localStorage.removeItem('userinfo')
     api.defaults.headers.common['Authorization'] = undefined
     api.defaults.headers.common['refresh-token'] = undefined
     navigate('/login')

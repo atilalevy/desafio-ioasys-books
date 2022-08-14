@@ -9,7 +9,7 @@ export default function LoginPage () {
     const [userPassword, setUserPassword] = useState('')
     const { handleLogin, handleLogout, authError, authErrorMessage, authenticated } = useContext(AuthContext)
 
-    const userName = localStorage.getItem('username')
+    const userInfo = JSON.parse(localStorage.getItem('userinfo'))
 
     return(
         <Container>
@@ -35,7 +35,7 @@ export default function LoginPage () {
                     </> 
                     :
                     <>
-                        <p>Olá <strong>{userName}</strong>! Você já está logado, deseja sair?</p>
+                        <p>Olá <strong>{userInfo.name}</strong>! Você já está logad{userInfo.gender === 'M' ? 'o' : 'a'}, deseja sair?</p>
                         <ButtonOut onClick={() => handleLogout()}>Sair</ButtonOut>
                     </>
                     }
