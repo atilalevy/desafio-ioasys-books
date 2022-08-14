@@ -15,7 +15,7 @@ export default function useAuth() {
 
     if (token) {
       api.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(token)}`
-      api.defaults.headers.common['refresh-token'] = `${JSON.parse(refreshToken)}`
+      api.defaults.headers.common['refresh-token'] = `Bearer ${JSON.parse(refreshToken)}`
       setAuthenticated(true)
     }
   }, [])
@@ -39,7 +39,7 @@ export default function useAuth() {
         localStorage.setItem('refresh-token', JSON.stringify(getRefreshToken))
         localStorage.setItem('userinfo', JSON.stringify(userInfo))
         api.defaults.headers.common['Authorization'] = `Bearer ${getToken}`
-        api.defaults.headers.common['refresh-token'] = `${getRefreshToken}`
+        api.defaults.headers.common['refresh-token'] = `Bearer ${getRefreshToken}`
         setAuthError(false)
         navigate('/')
       })

@@ -48,8 +48,8 @@ export default function ModalCard({ cardInfo, handleClose }) {
                     <CardInfos>
                         <p>INFORMAÇÕES</p>
                         <ul>
-                            {infos.map(item => (
-                                <li key={item.index}>
+                            {infos.map((item, index) => (
+                                <li key={index}>
                                     <p>{item.info}</p>
                                     <span>{item.value}</span>
                                 </li>

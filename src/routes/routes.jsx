@@ -6,7 +6,6 @@ import Loading from '../components/Loading'
 const LoginPage = React.lazy(() => import('../pages/LoginPage'))
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'))
 const HomePage = React.lazy(() => import('../pages/HomePage'))
-import api from '../services/api'
 
 function PrivateRoute({ children, redirectTo }) {
     const token = localStorage.getItem('token')
