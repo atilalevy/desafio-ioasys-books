@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-import { AuthContext } from '../Context/AuthContext'
+import Loading from '../components/Loading'
 
 const LoginPage = React.lazy(() => import('../pages/LoginPage'))
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'))
-const BooksPage = React.lazy(() => import('../pages/BooksPage'))
+const HomePage = React.lazy(() => import('../pages/HomePage'))
 import api from '../services/api'
 
 function PrivateRoute({ children, redirectTo }) {
@@ -13,16 +13,20 @@ function PrivateRoute({ children, redirectTo }) {
     const refreshToken = localStorage.getItem('refresh-token')
     return token && refreshToken ? children : <Navigate to={redirectTo} />
 }
-
-function Loading () {
-    return(
-        <h1>Loading...</h1>
-    )
-}
   
 export default function RoutesNav() {
     return (
         <Routes>
+            <Route 
+                path='/' 
+                element={
+                    <React.Suspense fallback={<Loading />}>
+                        <PrivateRoute redirectTo={'/login'}>
+                            <HomePage />
+                        </PrivateRoute>
+                    </React.Suspense>
+                } 
+            />
             <Route 
                 path="/login" 
                 element={
@@ -32,20 +36,10 @@ export default function RoutesNav() {
                 } 
             />
             <Route 
-                path='/' 
+                path='*' 
                 element={
                     <React.Suspense fallback={<Loading />}>
                         <NotFoundPage />
-                    </React.Suspense>
-                } 
-            />
-            <Route 
-                path='/livros' 
-                element={
-                    <React.Suspense fallback={<Loading />}>
-                        <PrivateRoute redirectTo={'/login'}>
-                            <BooksPage />
-                        </PrivateRoute>
                     </React.Suspense>
                 } 
             />

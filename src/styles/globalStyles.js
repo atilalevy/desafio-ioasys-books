@@ -6,9 +6,13 @@ const GlobalStyle = createGlobalStyle`
 
   // Variáveis de cor
   --white: #ffffff;
+  --white-transparent: rgba(255, 255, 255, 0.4);
+  --spanish-gray: #999999;
+  --dark-gray: #333333;
   --black: #000000;
   --black-transparent: rgba(0, 0, 0, 0.32);
   --firebrick-variation: #B22E6F;
+  --fandango: #AB2680;
 }
 
   body {
@@ -17,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, p, span {
     margin: 0;
   }
 
@@ -39,6 +43,11 @@ const GlobalStyle = createGlobalStyle`
       border: none;
       outline: none;
     }
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
   }
 `
 

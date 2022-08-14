@@ -1,106 +1,49 @@
 import React, { useState, useContext } from 'react'
-import styled from 'styled-components'
 
+import { Container, Wrapper, Content, Logo, ButtonOut, ErrorMessage } from './styles'
 import CustomInput from '../../components/CustomInput'
 import { AuthContext } from '../../Context/AuthContext'
-
-import bgAsset from '../../assets/bg-image-home.webp'
-import bgAssetMobile from '../../assets/bg-image-home-mobile.webp'
-import ioasysLogo from '../../assets/Logo.webp'
-
-const Container = styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 768px;
-    background-image: url(${bgAsset});
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    @media(max-width: 680px) {
-        background-image: url(${bgAssetMobile});
-    }
-`
-
-const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
-    max-width: 1280px;
-    height: 100%;
-
-    @media(max-width: 680px) {
-        padding: 0 12px;
-        align-items: center;
-        justify-content: center;
-    }
-`
-
-const Content = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    width: 100%;
-    max-width: 368px;
-
-    @media(max-width: 680px) {
-        width: 100%;
-    }
-`
-
-const Title = styled.h1`
-    font-family: 'Heebo', sans-serif;
-    font-size: 28px;
-    color: var(--white);
-    padding-left: 120px;
-    position: relative;
-    margin-bottom: 50px;
-
-    &:before {
-        content: '';
-        position: absolute;
-        background-image: url(${ioasysLogo});
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 104px;
-        height: 36px;
-        top: 2px;
-        left: 0;
-    }
-`
-
-const ButtonOut = styled.button`
-    
-`
 
 export default function LoginPage () {
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
-    const { handleLogin, handleLogout, authError, authenticated } = useContext(AuthContext)
+    const { handleLogin, handleLogout, authError, authErrorMessage, authenticated } = useContext(AuthContext)
+
+    const userName = localStorage.getItem('username')
 
     return(
         <Container>
             <Wrapper>
                 <Content>
-                    <Title>Books</Title>
-                    <CustomInput 
-                        label={'Email'} 
-                         type={'text'} 
-                         placeholder={'Informe seu email'}
-                         onChange={e => setUserEmail(e.target.value)}
-                    />
-                    <CustomInput 
-                        label={'Senha'} 
-                        type={'password'} 
-                        placeholder={'Informe sua senha'}
-                        btnLabel={'Entrar'}
-                        onChange={e => setUserPassword(e.target.value)}
-                        onClick={() => handleLogin(userEmail, userPassword)} 
-                    />
-                    { authenticated && <ButtonOut onClick={() => handleLogout()}>Sair</ButtonOut> }
+                    { !authenticated ?
+                    <>
+                        <Logo>Books</Logo>
+                        <CustomInput 
+                            label={'Email'} 
+                            type={'text'} 
+                            placeholder={'Informe seu email'}
+                            onChange={e => setUserEmail(e.target.value)}
+                        />
+                        <CustomInput 
+                            label={'Senha'} 
+                            type={'password'} 
+                            placeholder={'Informe sua senha'}
+                            btnLabel={'Entrar'}
+                            onChange={e => setUserPassword(e.target.value)}
+                            onClick={() => handleLogin(userEmail, userPassword)} 
+                        />
+                    </> 
+                    :
+                    <>
+                        <p>Olá <strong>{userName}</strong>! Você já está logado, deseja sair?</p>
+                        <ButtonOut onClick={() => handleLogout()}>Sair</ButtonOut>
+                    </>
+                    }
+                    { authError && 
+                        <ErrorMessage>
+                            <span>{authErrorMessage}</span>
+                        </ErrorMessage>
+                    }
                 </Content>
             </Wrapper>
         </Container>
