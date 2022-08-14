@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 
 import api from '../../services/api'
 import { AuthContext } from '../../Context/AuthContext'
@@ -17,7 +17,7 @@ export default function HomePage () {
     const [modalOpen, setModalOpen] = useState(false)
     const { handleLogout } = useContext(AuthContext)
 
-    const TestModal = (index) => {
+    const showModal = (index) => {
         setBookIndex(index)
         setModalOpen(true)
     }
@@ -52,7 +52,7 @@ export default function HomePage () {
                 </Header>
                 <Content>
                     {!loading && books.map((item, index) => (
-                        <Card cardInfo={item} key={item.id} handleClick={() => TestModal(index)}/>
+                        <Card cardInfo={item} key={item.id} handleClick={() => showModal(index)}/>
                     ))}
                     <Pagination 
                         pages={pages} 

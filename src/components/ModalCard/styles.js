@@ -58,8 +58,7 @@ const CardWrapper = styled.div`
     @media(max-width: 680px) {
         flex-wrap: wrap;
         justify-content: center;
-        height: 80%;
-        max-height: none;
+        height: 100%;
 
         img {
             width: 100%;
@@ -77,6 +76,10 @@ const CardContent = styled.div`
     width: 50%;
     height: 100%;
     line-height: 1.2;
+
+    @media(max-width: 1000px) {
+        width: 45%;
+    }
 
     @media(max-width: 680px) {
         width: 100%;
